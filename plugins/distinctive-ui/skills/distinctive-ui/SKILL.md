@@ -27,8 +27,10 @@ tell you to skip ahead (see "Pace").
 The two helper skills are optional installs, so first find out what this user already has — someone
 who keeps `ui-ux-pro-max` in `~/.claude/skills/` should never get a second copy.
 
-1. **Detect.** Run `node <this skill's base directory>/scripts/check-helpers.mjs` (read-only; prints
-   JSON). For `ui-ux-pro-max` and `apple-design` it reports where each was found: personal
+1. **Detect.** Decide first whether the request is a landing page, marketing site, homepage or scroll
+   experience (`landing`) or product UI people work in (`product`), then run
+   `node <this skill's base directory>/scripts/check-helpers.mjs --page landing|product` (read-only;
+   prints JSON; leave `--page` out only if you genuinely can't tell). It reports where each helper was found: personal
    (`~/.claude/skills`), project (`.claude/skills`), or an enabled plugin. Also trust the session's
    skill list: a helper listed there (with or without a plugin prefix) is available even if the script
    didn't find it. If `node` or the `claude` CLI isn't available, rely on the skill list alone.
@@ -37,6 +39,13 @@ who keeps `ui-ux-pro-max` in `~/.claude/skills/` should never get a second copy.
    field), and that it installs as a plugin. Install only after a clear yes, with the script's
    `installCommand`, then tell the user to type `/reload-plugins`. If they say no, don't ask again
    this session. Never install silently — it changes their setup.
+
+   **Setup gate (do not skip).** The script's `offerNow` list is the set of offers you owe. Your
+   **first reply** in this skill must contain one line per `offerNow` entry (what it adds, source,
+   "install it?"), in the same message as the Round A questions, never as a separate stop. Skip an
+   entry only if the session skill list already has that helper or the user declined it this session.
+   An entry with `onlyIf` applies when its condition is true. Sending Round A (or anything else) without
+   these lines is a workflow failure, the same as writing code before Phase 4.
 4. **Until a helper is available, use `references/fallback-rules.md` for its part** and keep going.
    Never block the user's design task on setup.
 5. Load `design-orchestrator` (bundled with this plugin; it may be listed as
@@ -53,8 +62,9 @@ who keeps `ui-ux-pro-max` in `~/.claude/skills/` should never get a second copy.
    - Found → say in one line that scroll-craft leads this one, load it, and follow its process instead
      of Phases 3–5. Still run this skill's intake (Phase 1) first and hand scroll-craft the answers, so
      the user is not asked twice. Phase 6 handover and the build log (below) still apply.
-   - Missing → offer it once, like the other helpers (source and command from the script). If declined,
-     carry on with this workflow.
+   - Missing → it is in `offerNow`, so the setup gate above puts the offer in your first reply, with
+     source and command from the script. If declined, carry on with this workflow. If the user says yes,
+     wait for `/reload-plugins`, then load it; don't start Phase 3 on the fallback path meanwhile.
    - Product UI (dashboards, admin panels, tools, apps) always stays here, even with scroll-craft installed.
 8. Treat helper output as input, not a verdict. Keyword-matching generators can suggest the wrong
    genre — for example a luxury-portfolio look with display serifs for a quoting tool used ten hours a
@@ -76,7 +86,8 @@ who keeps `ui-ux-pro-max` in `~/.claude/skills/` should never get a second copy.
 
 ## Phase 1 — Intake (stop after each round)
 
-Ask **Round A** first, numbered so the user can answer quickly. After they answer, ask **Round B**,
+Before writing Round A, check the setup gate: every `offerNow` line goes at the top of the same
+message. Then ask **Round A**, numbered so the user can answer quickly. After they answer, ask **Round B**,
 pre-filled with what you already know (in *italics*) for them to correct. Question lists:
 `references/intake.md`. Push back on vague answers that decide the layout — "the main screen should
 show what the role needs" is not a job; propose one concrete sentence per role and ask them to confirm.

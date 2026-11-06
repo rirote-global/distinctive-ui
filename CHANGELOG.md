@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.2.1 — 2026-11-07
+
+- **Setup gate.** A missing helper could be detected and then never offered (a homepage request ran
+  without ever offering scroll-craft). `check-helpers.mjs` now takes `--page landing|product` and prints
+  `offerNow`, the exact offers owed, plus a `gate` line. The skill must put those offers in its first
+  reply, alongside Round A; sending Round A without them counts as a workflow failure. Product UI never
+  gets the scroll-craft offer.
+- **Handover names the helpers.** The handover template gains a "Helpers" line that says whether
+  scroll-craft led, was declined or was never offered, so a skipped offer surfaces at the end at the latest.
+
 ## 1.2.0 — 2026-11-06
 
 - **Build log.** New `references/build-log.md`: a per-person log of shipped looks

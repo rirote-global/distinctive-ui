@@ -2,6 +2,12 @@
 // Report whether the helper skills (ui-ux-pro-max, apple-design, scroll-craft) are already available, and where.
 // Read-only: it installs nothing. Output is JSON on stdout.
 // Looks in: ~/.claude/skills, <cwd>/.claude/skills, and enabled Claude Code plugins.
+//
+// Usage: node check-helpers.mjs [--page landing|product]
+//   --page landing  the request is a landing page, marketing site, homepage or scroll experience
+//   --page product  the request is product UI (dashboard, admin panel, tool, app)
+//   (omitted)       unknown: scroll-craft is listed in offerNow with a condition to check first
+// `offerNow` lists every missing helper the agent must offer in its first reply to the user.
 import { existsSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
@@ -54,10 +60,35 @@ for (const [name, info] of Object.entries(HELPERS)) {
   };
 }
 
+// Which kind of page the request is, from --page landing|product (also --page=landing).
+const argv = process.argv.slice(2);
+const pageArg = (argv.find(a => a.startsWith('--page=')) ?? '').slice(7) || argv[argv.indexOf('--page') + 1] || '';
+const page = ['landing', 'product'].includes(pageArg) ? pageArg : 'unknown';
+
+// The offers the agent owes the user. ui-ux-pro-max and apple-design matter for every request;
+// scroll-craft only for landing pages, so product UI never gets that offer.
+const WHY = {
+  'ui-ux-pro-max': 'design system data: palettes, font pairings, UX rules for web and SaaS',
+  'apple-design': 'accessibility, hierarchy and craft review; leads on iOS, macOS and desktop apps',
+  'scroll-craft': 'leads landing pages and marketing sites: page structure, scroll motion, layered hero',
+};
+const offerNow = Object.entries(helpers)
+  .filter(([name, h]) => !h.found && (name !== 'scroll-craft' || page !== 'product'))
+  .map(([name, h]) => ({
+    name, why: WHY[name], source: h.source, installCommand: h.installCommand,
+    ...(name === 'scroll-craft' && page === 'unknown'
+      ? { onlyIf: 'the request is a landing page, marketing site, homepage or scroll experience' } : {}),
+  }));
+
 console.log(JSON.stringify({
   claudeCli: pluginText !== null,
   marketplaceConfigured,
+  page,
   helpers,
+  offerNow,
+  gate: offerNow.length
+    ? 'Your first reply to the user must offer each offerNow helper (skip one only if the session skill list already has it, or the user declined it this session). Put the offers in the same message as the Round A questions.'
+    : 'Nothing to offer: every helper this request needs is available.',
   note: pluginText === null
     ? 'Could not run the claude CLI, so installed plugins were not checked. Also check the session skill list.'
     : 'Also check the session skill list: a helper listed there is available even if not found above.',

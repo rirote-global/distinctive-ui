@@ -66,6 +66,10 @@ a mobile bottom bar that is too tall), fix them, re-shoot, and write one before/
 
 **What's in it** — per role/screen, one line each, naming the signature pieces.
 
+**Helpers** — one line: which helper led and which reviewed, and for a landing page whether
+scroll-craft led, was declined, or was never offered. "Never offered" means the setup gate was
+skipped: say so plainly and offer it now.
+
 **Visual review** — the five fixes, plus any real bugs found by the flow tests.
 
 **Tested** — browser, sizes, which flows were scripted end to end, console errors, scroll check.
