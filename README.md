@@ -41,14 +41,14 @@ their own repositories. Note: the `ui-ux-pro-max` plugin also adds its companion
 In Claude Code:
 
 ```
-/plugin marketplace add rishabhsisodiya/distinctive-ui
+/plugin marketplace add rirote-global/distinctive-ui
 /plugin install distinctive-ui@distinctive-ui
 ```
 
 Or from a terminal:
 
 ```bash
-claude plugin marketplace add rishabhsisodiya/distinctive-ui
+claude plugin marketplace add rirote-global/distinctive-ui
 claude plugin install distinctive-ui@distinctive-ui
 ```
 
@@ -159,7 +159,7 @@ You don't need to do anything. The check finds copies in `~/.claude/skills/`, in
 Not using the plugin system at all? Copy the skills by hand:
 
 ```bash
-git clone https://github.com/rishabhsisodiya/distinctive-ui.git
+git clone https://github.com/rirote-global/distinctive-ui.git
 cp -r distinctive-ui/plugins/distinctive-ui/skills/distinctive-ui ~/.claude/skills/
 cp -r distinctive-ui/plugins/distinctive-ui/skills/design-orchestrator ~/.claude/skills/
 ```

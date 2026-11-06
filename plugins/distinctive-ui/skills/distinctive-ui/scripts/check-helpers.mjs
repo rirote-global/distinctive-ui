@@ -49,7 +49,7 @@ for (const [name, info] of Object.entries(HELPERS)) {
     ...(info.usedFor ? { usedFor: info.usedFor } : {}),
     installCommand: info.installCommand ? info.installCommand
       : marketplaceConfigured === false || marketplaceConfigured === null
-      ? `claude plugin marketplace add rishabhsisodiya/distinctive-ui && claude plugin install ${name}@${MARKETPLACE}`
+      ? `claude plugin marketplace add rirote-global/distinctive-ui && claude plugin install ${name}@${MARKETPLACE}`
       : `claude plugin install ${name}@${MARKETPLACE}`,
   };
 }
