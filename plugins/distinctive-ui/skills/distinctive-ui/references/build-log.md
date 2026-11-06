@@ -13,8 +13,12 @@ Resolved, never assumed. First hit wins:
 2. `<project root>/.claude/distinctive-ui/BUILDS.md`, if the project already has one
 3. `~/.claude/distinctive-ui/BUILDS.md` (the default: one log per person, across all projects)
 
-If the file does not exist, create it with the header row below and say so in one line. An empty log
-has nothing to clear: the first build passes by definition.
+If the file does not exist, create it with the header row below and say so in one line.
+
+**Backfill before the first gate.** An empty log clears every direction, so it protects nothing. When
+the log has no rows, ask once which looks the user has already shipped (or read them from project
+memory and the live sites), and add one row for each before writing directions. Mark these rows
+`backfilled` in the Project column. If the user has nothing shipped, say the log starts empty.
 
 ## Row format
 
@@ -23,7 +27,7 @@ One row per **shipped or approved** direction. Not the two that lost.
 ```markdown
 | Date | Project | Composition | Navigation / chrome | Palette family | Type pairing | Signature interaction |
 |---|---|---|---|---|---|---|
-| 2026-10-29 | riroteglobal.com | Document: audit report | Top bar + mobile sticky CTA | Report paper, ink, finding red | IBM Plex Sans + Plex Mono | Symptom checklist pre-fills the contact form |
+| 2026-10-30 | Software studio site | Split: proof rows beside a progress rail | Climbing rail with stops, mobile progress bar | Cool paper, navy ink, one cyan | Space Grotesk + Inter | Rail arrow rises as you scroll and lands on "Let's talk" |
 ```
 
 What each dimension records:

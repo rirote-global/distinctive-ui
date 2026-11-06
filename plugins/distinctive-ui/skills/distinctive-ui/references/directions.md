@@ -86,7 +86,7 @@ before anything is shown, unless the brief explicitly asked for it (then mark it
 | Indigo/violet primary or a purple-to-blue gradient by default | Colours drawn from the domain's materials, each with a stated purpose |
 | Glassmorphism, neon glow, gradient text | Weight and size for emphasis; shadows with offset and blur, tinted to the ground |
 | One radius, shadow and hover-lift on every surface | One radius scale for the page; elevation only where something is genuinely raised |
-| Everything fading or blurring in on load | Motion only on state change and cause → effect; off under reduced motion |
+| Decorative fade or blur-in on every element as it loads or scrolls into view | Motion only on state change and cause → effect (one signature move may carry the brand); off under reduced motion |
 | `transition: all`, or animating width/height/top/left | `transform` and `opacity` only |
 | Emoji as icons | One real icon set, or words |
 | Placeholder copy or names (lorem, John Doe, Acme) | Local names, places, currency and number format |

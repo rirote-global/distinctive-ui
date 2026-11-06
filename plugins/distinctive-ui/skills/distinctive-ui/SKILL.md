@@ -48,7 +48,8 @@ who keeps `ui-ux-pro-max` in `~/.claude/skills/` should never get a second copy.
      `ui-ux-pro-max` for visual exploration.
 7. **Scroll-driven marketing pages go to scroll-craft.** If the request is a landing page, marketing
    site, homepage or "scroll experience" (not a product screen people work in), check whether
-   `scroll-craft` is available (the script reports it; it may be listed as `nateherk-design:scroll-craft`).
+   `scroll-craft` is available (the script reports it). Load it by the name the session lists:
+   `nateherk-design:scroll-craft` when installed as its plugin, `scroll-craft` as a personal skill.
    - Found → say in one line that scroll-craft leads this one, load it, and follow its process instead
      of Phases 3–5. Still run this skill's intake (Phase 1) first and hand scroll-craft the answers, so
      the user is not asked twice. Phase 6 handover and the build log (below) still apply.

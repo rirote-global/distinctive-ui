@@ -5,7 +5,8 @@
 - **Build log.** New `references/build-log.md`: a per-person log of shipped looks
   (`~/.claude/distinctive-ui/BUILDS.md` by default). Phase 3 directions must differ from every row on
   at least 3 of 5 dimensions; Phase 6 appends the shipped direction. Stops client projects drifting
-  into one house style.
+  into one house style. An empty log is backfilled with the user's already-shipped looks before the
+  first gate, so the check works from the first project.
 - **Hard rules.** `references/directions.md` gains a Never / Instead table of ship-blockers, each with
   its fix, run alongside the anti-template checklist in Phase 4.
 - **scroll-craft routing.** Scroll-driven landing pages and marketing sites are handed to
