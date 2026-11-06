@@ -1,7 +1,7 @@
 ---
 name: setup
 description: >
-  Check and finish the distinctive-ui setup: detects whether the ui-ux-pro-max and apple-design skills
+  Check and finish the distinctive-ui setup: detects whether the ui-ux-pro-max, apple-design and scroll-craft skills
   are already available (personal, project or plugin), and that Node 22+, Python 3 and Chrome are available for the visual-review step.
   Offers to install only what is missing, with the user's permission. Run with /distinctive-ui:setup.
 disable-model-invocation: true
@@ -24,6 +24,7 @@ Cross-check the session's skill list too — a listed helper counts as available
 | `design-orchestrator` | decides which design skill leads | bundled in this plugin — always present |
 | `ui-ux-pro-max` | design-system data: styles, palettes, fonts, UX rules (MIT, by nextlevelbuilder) | github.com/nextlevelbuilder/ui-ux-pro-max-skill |
 | `apple-design` | Apple HIG review + craft lens (by dickwu) | github.com/dickwu/apple-design-skill |
+| `scroll-craft` | optional: leads scroll-driven landing pages and marketing sites (MIT, by Nate Herk) | github.com/nateherkai/scroll-craft (its own marketplace; plugin `nateherk-design`) |
 
 **Only offer to install what is genuinely missing.** A helper the user already has — in
 `~/.claude/skills/`, in the project, or as a plugin — is ready; say so and leave it alone, so they
@@ -42,6 +43,10 @@ slash commands like `/plugin install` must be typed by the user.
 git clone https://github.com/dickwu/apple-design-skill.git ~/.claude/skills/apple-design
 npx ui-ux-pro-max-cli init --ai claude      # run inside the project; installs .claude/skills/ui-ux-pro-max
 ```
+
+`scroll-craft` installs from its author's marketplace, not this one: use the script's `installCommand`
+for it as given. Only offer it to users who build marketing or landing pages; it is never needed for
+product UI.
 
 If the user declines a helper, that is fine: the workflow falls back to its built-in rules for that
 part (`references/fallback-rules.md` in the distinctive-ui skill).

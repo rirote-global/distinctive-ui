@@ -1,8 +1,8 @@
 {
   "name": "distinctive-ui",
   "displayName": "Distinctive UI",
-  "version": "1.1.0",
-  "description": "Creative-director workflow that designs interfaces which could only belong to your product: intake, brief, three art directions, build, real-browser visual review and an honest handover. Routes to ui-ux-pro-max and apple-design.",
+  "version": "1.2.0",
+  "description": "Creative-director workflow that designs interfaces which could only belong to your product: intake, brief, three art directions, build, real-browser visual review and an honest handover. Routes to ui-ux-pro-max and apple-design, and hands scroll-driven landing pages to scroll-craft.",
   "author": {
     "name": "Rishabh Sisodiya",
     "url": "https://github.com/rishabhsisodiya"

@@ -9,11 +9,13 @@ description: >
 
 # Design Orchestrator
 
-Two design skills overlap, so this skill decides which one leads.
+Several design skills overlap, so this skill decides which one leads.
 
 - **ui-ux-pro-max** — web/product design system: styles, palettes, font pairings, UX guidelines,
   charts, stack-specific implementation.
 - **apple-design** — Apple Human Interface Guidelines reviewer plus a design-craft lens.
+- **scroll-craft** (optional, third-party) — scroll-driven marketing pages: page grammars, layered
+  heroes, a scroll engine and a scroll-position screenshot harness.
 
 When installed through the `distinctive-ui` plugin they may appear namespaced
 (`ui-ux-pro-max:ui-ux-pro-max`, `apple-design:apple-design`); a copy in `~/.claude/skills/` appears
@@ -35,12 +37,17 @@ Decide from the codebase (e.g. `package.json`, `app.json`, `*.xcodeproj`, `pubsp
 
 | Target | Primary (decides) | Secondary (supports) |
 |---|---|---|
+| Scroll-driven landing page / marketing site / homepage, when `scroll-craft` is available | `scroll-craft` — page structure, scroll motion, layered hero, its own verification | `ui-ux-pro-max` for palette and type options only; `apple-design` for accessibility review |
 | Web / SaaS / dashboards / landing pages (Next.js, React, Vue, etc.) | `ui-ux-pro-max` — design system, layout, components, tokens | `apple-design` — review/audit layer only: accessibility, clarity, hierarchy, craft critique |
 | React Native / Flutter mobile / iOS (SwiftUI, UIKit) | `apple-design` — platform guidelines: navigation, controls, gestures, safe areas, typography | `ui-ux-pro-max` — visual/style exploration: palettes, fonts, mood |
 | macOS native (AppKit, SwiftUI) | `apple-design` | `ui-ux-pro-max` for visual exploration |
 | Tauri / Electron desktop | `apple-design` for window chrome, menus, keyboard shortcuts, and OS conventions on macOS | `ui-ux-pro-max` for the in-app content surface (it is web tech) |
 
 Load the primary skill first, then the secondary only for the part it supports.
+
+If `scroll-craft` is missing, landing pages use the Web row below. Never route product UI (tools,
+dashboards, admin panels, apps people work in) to `scroll-craft`: its motion and page grammars are
+built for persuasion, not for repeated daily use.
 
 ## Step 3 — Conflict rule
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Report whether the helper skills (ui-ux-pro-max, apple-design) are already available, and where.
+// Report whether the helper skills (ui-ux-pro-max, apple-design, scroll-craft) are already available, and where.
 // Read-only: it installs nothing. Output is JSON on stdout.
 // Looks in: ~/.claude/skills, <cwd>/.claude/skills, and enabled Claude Code plugins.
 import { existsSync } from 'node:fs';
@@ -11,6 +11,12 @@ const MARKETPLACE = 'distinctive-ui';
 const HELPERS = {
   'ui-ux-pro-max': { source: 'github.com/nextlevelbuilder/ui-ux-pro-max-skill', license: 'MIT' },
   'apple-design': { source: 'github.com/dickwu/apple-design-skill', license: 'see upstream repo' },
+  // Optional, third-party, ships from its author's own marketplace (plugin name differs from skill name).
+  'scroll-craft': {
+    source: 'github.com/nateherkai/scroll-craft', license: 'MIT', plugin: 'nateherk-design',
+    usedFor: 'scroll-driven landing pages and marketing sites only',
+    installCommand: 'claude plugin marketplace add nateherkai/scroll-craft && claude plugin install nateherk-design@nateherk',
+  },
 };
 
 function claude(args) {
@@ -35,12 +41,14 @@ for (const [name, info] of Object.entries(HELPERS)) {
   const where = [];
   if (existsSync(join(homedir(), '.claude', 'skills', name, 'SKILL.md'))) where.push('personal (~/.claude/skills)');
   if (existsSync(join(cwd, '.claude', 'skills', name, 'SKILL.md'))) where.push('project (.claude/skills)');
-  for (const p of plugins ?? []) if (p.name === name && p.enabled) where.push(`plugin ${p.name}@${p.marketplace}`);
+  for (const p of plugins ?? []) if ((p.name === name || p.name === info.plugin) && p.enabled) where.push(`plugin ${p.name}@${p.marketplace}`);
   helpers[name] = {
     found: where.length > 0,
     where,
     source: info.source,
-    installCommand: marketplaceConfigured === false || marketplaceConfigured === null
+    ...(info.usedFor ? { usedFor: info.usedFor } : {}),
+    installCommand: info.installCommand ? info.installCommand
+      : marketplaceConfigured === false || marketplaceConfigured === null
       ? `claude plugin marketplace add rishabhsisodiya/distinctive-ui && claude plugin install ${name}@${MARKETPLACE}`
       : `claude plugin install ${name}@${MARKETPLACE}`,
   };

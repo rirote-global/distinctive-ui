@@ -4,7 +4,8 @@ description: >
   Creative-director workflow for designing or redesigning an interface with an identity that could
   only belong to THIS product — not a generic AI template. Runs the full phased process (intake →
   brief → three art directions → build → real-browser visual review → honest handover) and routes
-  to design-orchestrator, ui-ux-pro-max and apple-design along the way. Use this whenever the user
+  to design-orchestrator, ui-ux-pro-max, apple-design and (for scroll-driven landing pages)
+  scroll-craft along the way. Use this whenever the user
   wants to design, redesign, restyle or prototype a screen, page, dashboard, app or product UI; says
   "make it look less generic / more distinctive / not like a template"; asks for art directions or
   design options; wants a clickable prototype; or pastes a design brief — even if they don't name
@@ -45,7 +46,16 @@ who keeps `ui-ux-pro-max` in `~/.claude/skills/` should never get a second copy.
      UX rules); `apple-design` is a review layer only (accessibility, hierarchy, clarity, craft).
    - **iOS / macOS / React Native / Flutter / Tauri window chrome** → `apple-design` leads;
      `ui-ux-pro-max` for visual exploration.
-7. Treat helper output as input, not a verdict. Keyword-matching generators can suggest the wrong
+7. **Scroll-driven marketing pages go to scroll-craft.** If the request is a landing page, marketing
+   site, homepage or "scroll experience" (not a product screen people work in), check whether
+   `scroll-craft` is available (the script reports it; it may be listed as `nateherk-design:scroll-craft`).
+   - Found → say in one line that scroll-craft leads this one, load it, and follow its process instead
+     of Phases 3–5. Still run this skill's intake (Phase 1) first and hand scroll-craft the answers, so
+     the user is not asked twice. Phase 6 handover and the build log (below) still apply.
+   - Missing → offer it once, like the other helpers (source and command from the script). If declined,
+     carry on with this workflow.
+   - Product UI (dashboards, admin panels, tools, apps) always stays here, even with scroll-craft installed.
+8. Treat helper output as input, not a verdict. Keyword-matching generators can suggest the wrong
    genre — for example a luxury-portfolio look with display serifs for a quoting tool used ten hours a
    day. Say what you took, what you overrode, and why, in one line.
 
@@ -78,6 +88,11 @@ ASSUMPTION. Ask the user to confirm or correct.
 
 ## Phase 3 — Three art directions (stop)
 
+**Read the build log first** (`references/build-log.md`). Every row is a look this user has already
+shipped. Each of the three directions must differ from **every** row on at least 3 of the 5 dimensions,
+checked row by row. If one fails, change the direction, not the log. Say the result in one line under
+the trade-off table.
+
 Three directions that differ in **layout and concept**, not just colour — template, layout-from-job
 table and trade-off table in `references/directions.md`. End with a clear recommendation, often a mix
 ("A, with C's ledger and B's folding commission tab") that covers each direction's weak spot.
@@ -109,7 +124,8 @@ role, 4c mobile/field role). State the split in two lines, then build.
 - **Light dependencies:** nothing the target doesn't already use.
 - When roles share data, make one role's actions visible to the others — it is what makes a
   prototype convincing in a demo.
-- Run the anti-template checklist (`references/directions.md`) before showing anything; fix every "yes".
+- Run the anti-template checklist and the hard-rules table (`references/directions.md`) before
+  showing anything; fix every "yes" and every "Never".
 
 ## Phase 5 — Visual review in a real browser
 
@@ -132,7 +148,8 @@ Use the template in `references/verification.md`: what was built, what you actua
 sizes, flows), what you did **not** test, which assumptions are still open, and what a backend/API
 must provide before this can ship. Never call it "production-ready" unless those checks were run.
 If the project keeps memory, record the approved direction and tokens so later sessions continue in
-the same design language.
+the same design language. Then **append one row to the build log** for what shipped, and say in the
+handover which dimensions it shares with earlier rows.
 
 ## Reference files
 
@@ -141,6 +158,7 @@ the same design language.
   anti-template checklist, token documentation pattern.
 - `references/verification.md` — driving `scripts/shoot.mjs`, flow-test gotchas, handover template.
 - `references/fallback-rules.md` — compact UX/accessibility rules used when a helper skill is missing.
+- `references/build-log.md` — where the per-user log of shipped looks lives, its row format and the gate.
 - `scripts/check-helpers.mjs` — read-only detection of which helper skills the user already has.
 - `references/example-quoting-tool.md` — a worked example of what "distinctive" meant on a real
   project. Read it for calibration; don't copy its look.

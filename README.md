@@ -17,6 +17,8 @@ intake → brief → three art directions → build → real-browser review → 
 - **Checks its own work in a real browser.** A bundled headless-Chrome script takes desktop and
   mobile screenshots, runs your flows end to end, and catches console errors. It then fixes the five
   worst visual problems it found.
+- **Remembers what you've shipped.** A build log records each approved look, and new directions must
+  differ from every earlier one, so your clients don't all end up with the same house style.
 - **Tells you the truth at handover**: what was tested, what wasn't, which assumptions are open,
   and what your backend must provide.
 
@@ -27,7 +29,8 @@ install if you don't already have them:
 |---|---|---|
 | [ui-ux-pro-max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | design-system data: styles, palettes, font pairings, UX rules, stack guides. Leads on web | nextlevelbuilder (MIT) |
 | [apple-design](https://github.com/dickwu/apple-design-skill) | Apple HIG reviewer and craft lens. Leads on iOS/macOS, reviews on web | dickwu |
-| design-orchestrator | decides which of the two leads, and settles conflicts. Bundled here | this repo |
+| [scroll-craft](https://github.com/nateherkai/scroll-craft) | optional: leads scroll-driven landing pages and marketing sites, after this plugin's intake | Nate Herk (MIT) |
+| design-orchestrator | decides which skill leads, and settles conflicts. Bundled here | this repo |
 
 The two third-party skills are never copied into this repo. If you want them, they're installed from
 their own repositories. Note: the `ui-ux-pro-max` plugin also adds its companion skills: `brand`,
@@ -141,7 +144,7 @@ plugins/distinctive-ui/
 └── skills/
     ├── distinctive-ui/                  the workflow
     │   ├── SKILL.md
-    │   ├── references/                  intake, directions, verification, fallback rules, worked example
+    │   ├── references/                  intake, directions + hard rules, build log, verification, fallback rules, worked example
     │   └── scripts/                     check-helpers.mjs (detect helpers), shoot.mjs (headless-Chrome review)
     ├── design-orchestrator/SKILL.md     routes between ui-ux-pro-max and apple-design
     └── setup/SKILL.md                   /distinctive-ui:setup

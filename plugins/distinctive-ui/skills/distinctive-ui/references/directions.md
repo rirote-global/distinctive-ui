@@ -73,3 +73,28 @@ spacing, and the signature pieces. Define dark mode only if it was asked for.
 Also check: the heading on the home screen says something only this user would need today
 ("3 sheets need you today"), not "Dashboard"; numbers use tabular figures and local format;
 status uses words and shape, not colour alone.
+
+## Hard rules (ship-blockers, each with its fix)
+
+The checklist above asks questions. These are not questions: any "Never" found in the build is fixed
+before anything is shown, unless the brief explicitly asked for it (then mark it ASSUMPTION).
+
+| Never | Instead |
+|---|---|
+| A row of equal stat cards as the top of the screen | One answer to the role's job ("3 sheets need you today"), everything else quieter |
+| Invented, round or always-rising numbers | Uneven real-feeling data, at least one bad trend with its reason, an empty case. No number, no counter |
+| Indigo/violet primary or a purple-to-blue gradient by default | Colours drawn from the domain's materials, each with a stated purpose |
+| Glassmorphism, neon glow, gradient text | Weight and size for emphasis; shadows with offset and blur, tinted to the ground |
+| One radius, shadow and hover-lift on every surface | One radius scale for the page; elevation only where something is genuinely raised |
+| Everything fading or blurring in on load | Motion only on state change and cause → effect; off under reduced motion |
+| `transition: all`, or animating width/height/top/left | `transform` and `opacity` only |
+| Emoji as icons | One real icon set, or words |
+| Placeholder copy or names (lorem, John Doe, Acme) | Local names, places, currency and number format |
+| A button whose only effect is a toast | It changes state, navigates, copies or prints; unbuilt features shown disabled with "next build step" |
+| Colour as the only status signal | Words and shape, colour as support |
+| Two labels for one action ("Get in touch" here, "Contact us" there) | One label per intent, used everywhere |
+| A wrapped primary button label at desktop | One to three words, one line |
+| Muted text below 4.5:1, measured on the render | Tint the muted colour from the ink until it passes |
+| Horizontal page scroll at 360px | Fix the layout; mobile gets its own composition |
+| Em dash in visible copy | Period, comma, colon or parentheses |
+| A direction that fails the build log gate (`build-log.md`) | Change the direction, never the log |
